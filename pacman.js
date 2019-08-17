@@ -10,7 +10,7 @@ const inky = {
   name: 'Inky',
   colour: 'Red',
   character: 'Shadow',
-  edible: false
+  edible: true
 }; 
 
 const blinky = {
@@ -18,7 +18,7 @@ const blinky = {
   name: 'Blinky',
   colour: 'Cyan',
   character: 'Speedy', 
-  edible: false
+  edible: true
 };
 
 const pinky = {
@@ -26,7 +26,7 @@ const pinky = {
   name: 'Pinky',
   colour: 'Pink',
   character: 'Bashful', 
-  edible: false
+  edible: true
 };
 
 const clyde = {
@@ -34,9 +34,10 @@ const clyde = {
   name: 'Clyde',
   colour: 'Orange',
   character: 'Pokey', 
-  edible: false
+  edible: true
 }; 
-// replace this comment with your four ghosts setup as objects
+
+const ghosts = [inky, blinky, pinky, clyde]; 
 
 
 // Draw the screen functionality
@@ -60,6 +61,10 @@ function displayStats() {
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
   console.log('(d) Eat Dot');
+  console.log('(1) Eat Inky');
+  console.log('(2) Eat Blinky');
+  console.log('(3) Eat Pinky');
+  console.log('(4) Eat Clyde');
   console.log('(q) Quit');
 }
 
@@ -75,7 +80,17 @@ function eatDot() {
   score += 10;
 }
 
-
+function eatGhost(ghost) {
+  if (ghosts[ghost]['edible'] === true) {
+    score += 100;
+    console.log(`\nYou ate ${ghosts[ghost]['name']}!`); 
+    ghosts[ghost]['edible'] = false; 
+  } 
+  if (ghosts[ghost]['edible'] === false) {
+    lives -= 1;
+    console.log(`n${ghosts[ghost]['name']} was not edible, lost a life.`); 
+  }
+}
 // Process Player's Input
 function processInput(key) {
   switch(key) {
@@ -86,6 +101,18 @@ function processInput(key) {
     case 'd':
       eatDot();
       break;
+    case '1':
+      eatGhost(ghosts[1]);
+      break;
+    case '2':
+      eatGhost(ghosts[2]);
+      break;
+    case '3':
+      eatGhost(ghosts[3]); 
+      break; 
+    case '4':
+      eatGhost(ghosts[4]); 
+      break;    
     default:
       console.log('\nInvalid Command!');
   }
