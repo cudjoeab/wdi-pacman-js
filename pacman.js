@@ -81,12 +81,11 @@ function eatDot() {
 }
 
 function eatGhost(ghost) {
-  if (ghosts[ghost]['edible'] === true) {
+  if (ghosts['edible'] === true) {
     score += 100;
     console.log(`\nYou ate ${ghosts[ghost]['name']}!`); 
     ghosts[ghost]['edible'] = false; 
-  } 
-  if (ghosts[ghost]['edible'] === false) {
+  } else if (ghosts['edible'] === false) {
     lives -= 1;
     console.log(`n${ghosts[ghost]['name']} was not edible, lost a life.`); 
   }
@@ -102,16 +101,16 @@ function processInput(key) {
       eatDot();
       break;
     case '1':
-      eatGhost(ghosts[1]);
+      eatGhost(ghosts[0]);
       break;
     case '2':
-      eatGhost(ghosts[2]);
+      eatGhost(ghosts[1]);
       break;
     case '3':
-      eatGhost(ghosts[3]); 
+      eatGhost(ghosts[2]); 
       break; 
     case '4':
-      eatGhost(ghosts[4]); 
+      eatGhost(ghosts[3]); 
       break;    
     default:
       console.log('\nInvalid Command!');
